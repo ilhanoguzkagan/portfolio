@@ -17,7 +17,7 @@ export default function Home() {
       <div ref={cursorRef} className="liquid-cursor" />
       
       {/* Profile Photo Area */}
-      <div className="fixed top-4 right-4 md:top-8 md:right-8 z-20 group">
+      <div className="profile-photo-container fixed top-4 right-4 md:top-8 md:right-8 z-20 group">
         <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-border/50 hover:border-foreground/20 transition-all duration-500 cursor-pointer group-hover:scale-[1.5] md:group-hover:scale-[2] group-hover:shadow-2xl">
           <Image 
             src="/my-photo.jpg" 
@@ -50,16 +50,51 @@ export default function Home() {
       <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-10 lg:hidden">
         <div className="flex gap-2 p-3 bg-background/80 backdrop-blur-lg rounded-full border border-border/50 shadow-lg">
           {[
-            { id: "intro", icon: "🏠" },
-            { id: "work", icon: "💼" },
-            { id: "thoughts", icon: "💭" },
-            { id: "certifications", icon: "🏆" },
-            { id: "connect", icon: "🤝" }
+            { 
+              id: "intro", 
+              icon: (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              )
+            },
+            { 
+              id: "work", 
+              icon: (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6" />
+                </svg>
+              )
+            },
+            { 
+              id: "thoughts", 
+              icon: (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              )
+            },
+            { 
+              id: "certifications", 
+              icon: (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              )
+            },
+            { 
+              id: "connect", 
+              icon: (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              )
+            }
           ].map((section) => (
             <button
               key={section.id}
               onClick={() => document.getElementById(section.id)?.scrollIntoView({ behavior: "smooth" })}
-              className={`w-10 h-10 rounded-full flex items-center justify-center text-sm transition-all duration-300 ${
+              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                 activeSection === section.id 
                   ? "bg-foreground text-background scale-110" 
                   : "bg-transparent text-muted-foreground hover:bg-muted/30 hover:text-foreground"
@@ -108,6 +143,24 @@ export default function Home() {
                     <span>Available for work</span>
                   </div>
                   <div className="ml-4 text-muted-foreground/80">Cork, Ireland</div>
+                  
+                  <div className="mt-4">
+                    <Link
+                      href="/Oguzkagan-CV.pdf"
+                      download="Oguzkagan_Ilhan_CV.pdf"
+                      className="group inline-flex items-center gap-2 px-3 py-2 text-sm border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300"
+                    >
+                      <svg
+                        className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span>Download CV</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -117,7 +170,7 @@ export default function Home() {
                 <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
                 <div className="space-y-2">
                   <div className="text-foreground">Amazon FBA Seller</div>
-                  <div className="text-muted-foreground">@ Self-Managed E-Commerce</div>
+                  <div className="text-muted-foreground">@ E-Commerce Entrepreneur</div>
                   <div className="text-xs text-muted-foreground">Mar 2024 — Present</div>
                 </div>
               </div>
@@ -125,7 +178,7 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
                 <div className="flex flex-wrap gap-2">
-                  {["SQL", "Python", "Power BI", "Advanced Excel", "PFMEA", "ISO 9001"].map((skill) => (
+                  {["SQL", "Python", "Power BI", "Advanced Excel", "PFMEA", "ISO 9001", "8D"].map((skill) => (
                     <span
                       key={skill}
                       className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
@@ -142,8 +195,8 @@ export default function Home() {
         <section id="work" ref={(el) => (sectionsRef.current[1] = el)} className="min-h-screen py-16 md:py-24 lg:py-32 opacity-0">
           <div className="space-y-8 md:space-y-12 lg:space-y-16">
             <div className="flex items-end justify-between">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Selected Work</h2>
-              <div className="text-sm text-muted-foreground font-mono">2019 — 2024</div>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Experiences</h2>
+              <div className="text-sm text-muted-foreground font-mono">2019 – Present</div>
             </div>
 
             <div className="space-y-6 md:space-y-8 lg:space-y-12">
@@ -153,8 +206,8 @@ export default function Home() {
                   className="group grid md:grid-cols-8 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 py-6 md:py-8 border-b border-border/50 hover:border-border transition-colors duration-500"
                 >
                   <div className="md:col-span-2 lg:col-span-2">
-                    <div className="text-lg md:text-xl lg:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
-                      {job.year}
+                    <div className="text-base md:text-lg lg:text-xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500 whitespace-nowrap">
+                      {job.startYear} – {job.endYear}
                     </div>
                   </div>
 
@@ -166,11 +219,11 @@ export default function Home() {
                     <p className="text-muted-foreground leading-relaxed max-w-lg">{job.description}</p>
                   </div>
 
-                  <div className="md:col-span-2 lg:col-span-4 flex flex-wrap gap-1 md:gap-2 md:justify-end lg:justify-end">
+                  <div className="md:col-span-2 lg:col-span-4 flex flex-wrap gap-2 items-start md:justify-end lg:justify-end">
                     {job.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs text-muted-foreground rounded group-hover:border-muted-foreground/50 transition-colors duration-500"
+                        className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 whitespace-nowrap"
                       >
                         {tech}
                       </span>
@@ -376,7 +429,6 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 md:gap-8">
             <div className="space-y-2">
               <div className="text-sm text-muted-foreground">© 2025 Oguzkagan Ilhan. All rights reserved.</div>
-              <div className="text-xs text-muted-foreground">Built with Next.js and deployed on Vercel</div>
             </div>
 
             <div className="flex items-center gap-4">
@@ -406,22 +458,6 @@ export default function Home() {
                     <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                   </svg>
                 )}
-              </button>
-
-              <button className="group p-3 rounded-lg border border-border hover:border-muted-foreground/50 transition-all duration-300">
-                <svg
-                  className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                  />
-                </svg>
               </button>
             </div>
           </div>

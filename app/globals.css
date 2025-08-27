@@ -260,6 +260,16 @@
   z-index: 30;
 }
 
+/* Mobile profile photo fix */
+@media (max-width: 768px) {
+  .profile-photo-container {
+    position: fixed !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    z-index: 50 !important;
+  }
+}
+
 /* 3D Liquid Blob Styles */
 .liquid-blob-3d {
   pointer-events: none;

@@ -1,28 +1,32 @@
 
 export const workExperience = [
   {
-    year: "2024",
+    startYear: "2024",
+    endYear: "currently",
     role: "Amazon FBA Seller",
-    company: "Self-Managed E-Commerce - USA Market",
+    company: "E-Commerce Entrepreneur - USA Market",
     description: "Launched and manage successful Amazon FBA business, optimising product listings and implementing targeted advertising campaigns to enhance revenue and operational performance.",
     tech: ["Amazon Seller Central", "Data Analysis", "Inventory Management"],
   },
   {
-    year: "2022",
+    startYear: "2022",
+    endYear: "2023",
     role: "Associate",
     company: "Musgrave Group - Cork, Ireland",
     description: "Operate with high accuracy in fast-paced chilled warehouse using voice-picking technology, contributing to supply chain efficiency and maintaining operational integrity.",
     tech: ["Voice-picking", "Inventory Management", "Supply Chain"],
   },
   {
-    year: "2022",
+    startYear: "2021",
+    endYear: "2022",
     role: "Technical Customer Services Engineer",
     company: "Eczacıbaşı Building Materials - Turkey",
     description: "Managed B2B customer complaints via SAP portal, automated OEM reports using Excel, conducted root cause analyses providing actionable feedback to production teams.",
     tech: ["SAP", "Excel Macros", "Root Cause Analysis"],
   },
   {
-    year: "2021",
+    startYear: "2019",
+    endYear: "2021",
     role: "Quality Improvement Supervisor",
     company: "Sampa Automotive - Turkey",
     description: "Managed team of 6 engineers, upgraded B2B complaints portal achieving 17% efficiency improvement, designed KPI dashboards using Power BI for stakeholders.",
@@ -100,5 +104,5 @@ export const socialLinks = [
   { name: "GitHub", handle: "@ilhanoguzkagan", url: "https://github.com/ilhanoguzkagan" },
   { name: "LinkedIn", handle: "oguzkagan ilhan", url: "https://www.linkedin.com/in/oguzkagan-ilhan-29620085/" },
   { name: "Email", handle: "Contact via email", url: "mailto:oguzkaganilhan@gmail.com" },
-  { name: "Phone", handle: "+353 830160611", url: "tel:+353830160611" },
+  { name: "Phone", handle: "Call me", url: "tel:+353830160611" },
 ];
