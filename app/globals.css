@@ -144,6 +144,17 @@
   body {
     cursor: none;
   }
+  
+  /* Show default cursor on mobile devices */
+  @media (max-width: 768px) {
+    body {
+      cursor: default;
+    }
+    
+    .liquid-cursor {
+      display: none;
+    }
+  }
 
   .liquid-cursor {
     position: fixed;
@@ -325,6 +336,13 @@
 .dark .glass-highlight {
   mix-blend-mode: screen;
   opacity: 0.4;
+}
+
+/* Mobile bottom padding for navigation */
+@media (max-width: 1024px) {
+  main {
+    padding-bottom: 6rem;
+  }
 }
 
 /* Cyberpunk Glow Text */

@@ -17,8 +17,8 @@ export default function Home() {
       <div ref={cursorRef} className="liquid-cursor" />
       
       {/* Profile Photo Area */}
-      <div className="fixed top-8 right-8 z-20 group">
-        <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-border/50 hover:border-foreground/20 transition-all duration-500 cursor-pointer group-hover:scale-[2] group-hover:shadow-2xl">
+      <div className="fixed top-4 right-4 md:top-8 md:right-8 z-20 group">
+        <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-border/50 hover:border-foreground/20 transition-all duration-500 cursor-pointer group-hover:scale-[1.5] md:group-hover:scale-[2] group-hover:shadow-2xl">
           <Image 
             src="/my-photo.jpg" 
             alt="Oguzkagan Ilhan"
@@ -30,6 +30,7 @@ export default function Home() {
         </div>
       </div>
       
+      {/* Desktop Navigation */}
       <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
         <div className="flex flex-col gap-4">
           {["intro", "work", "thoughts", "certifications", "connect"].map((section) => (
@@ -45,17 +46,43 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-8 lg:px-16">
+      {/* Mobile Navigation */}
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-10 lg:hidden">
+        <div className="flex gap-2 p-3 bg-background/80 backdrop-blur-lg rounded-full border border-border/50 shadow-lg">
+          {[
+            { id: "intro", icon: "🏠" },
+            { id: "work", icon: "💼" },
+            { id: "thoughts", icon: "💭" },
+            { id: "certifications", icon: "🏆" },
+            { id: "connect", icon: "🤝" }
+          ].map((section) => (
+            <button
+              key={section.id}
+              onClick={() => document.getElementById(section.id)?.scrollIntoView({ behavior: "smooth" })}
+              className={`w-10 h-10 rounded-full flex items-center justify-center text-sm transition-all duration-300 ${
+                activeSection === section.id 
+                  ? "bg-foreground text-background scale-110" 
+                  : "bg-transparent text-muted-foreground hover:bg-muted/30 hover:text-foreground"
+              }`}
+              aria-label={`Navigate to ${section.id}`}
+            >
+              {section.icon}
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
         <header
           id="intro"
           ref={(el) => (sectionsRef.current[0] = el)}
           className="min-h-screen flex items-center opacity-0 relative"
         >
-          <div className="grid lg:grid-cols-5 gap-16 w-full relative z-10">
+          <div className="grid lg:grid-cols-5 gap-8 md:gap-12 lg:gap-16 w-full relative z-10">
             <div className="lg:col-span-3 space-y-8">
               <div className="space-y-2">
                 <div className="text-sm text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2025</div>
-                <h1 className="text-6xl lg:text-7xl font-light tracking-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight">
                   Oguzkagan
                   <br />
                   <span className="text-muted-foreground">Ilhan</span>
@@ -63,7 +90,7 @@ export default function Home() {
               </div>
 
               <div className="space-y-6 max-w-md">
-                <p className="text-xl text-muted-foreground leading-relaxed">
+                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
                   A versatile Industrial Engineer with a strong foundation in <span className="text-foreground">data analysis</span>, <span className="text-foreground">quality management</span>, and <span className="text-foreground">process optimisation</span>.
                   Experienced in leading
                   <span className="text-foreground"> cross-functional teams</span>,<span className="text-foreground"> continuous improvement</span>,
@@ -112,34 +139,34 @@ export default function Home() {
           </div>
         </header>
 
-        <section id="work" ref={(el) => (sectionsRef.current[1] = el)} className="min-h-screen py-32 opacity-0">
-          <div className="space-y-16">
+        <section id="work" ref={(el) => (sectionsRef.current[1] = el)} className="min-h-screen py-16 md:py-24 lg:py-32 opacity-0">
+          <div className="space-y-8 md:space-y-12 lg:space-y-16">
             <div className="flex items-end justify-between">
-              <h2 className="text-4xl font-light">Selected Work</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Selected Work</h2>
               <div className="text-sm text-muted-foreground font-mono">2019 — 2024</div>
             </div>
 
-            <div className="space-y-12">
+            <div className="space-y-6 md:space-y-8 lg:space-y-12">
               {workExperience.map((job, index) => (
                 <div
                   key={index}
-                  className="group grid lg:grid-cols-12 gap-8 py-8 border-b border-border/50 hover:border-border transition-colors duration-500"
+                  className="group grid md:grid-cols-8 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 py-6 md:py-8 border-b border-border/50 hover:border-border transition-colors duration-500"
                 >
-                  <div className="lg:col-span-2">
-                    <div className="text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
+                  <div className="md:col-span-2 lg:col-span-2">
+                    <div className="text-lg md:text-xl lg:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
                       {job.year}
                     </div>
                   </div>
 
-                  <div className="lg:col-span-6 space-y-3">
+                  <div className="md:col-span-4 lg:col-span-6 space-y-2 md:space-y-3">
                     <div>
-                      <h3 className="text-xl font-medium">{job.role}</h3>
+                      <h3 className="text-lg md:text-xl font-medium">{job.role}</h3>
                       <div className="text-muted-foreground">{job.company}</div>
                     </div>
                     <p className="text-muted-foreground leading-relaxed max-w-lg">{job.description}</p>
                   </div>
 
-                  <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end">
+                  <div className="md:col-span-2 lg:col-span-4 flex flex-wrap gap-1 md:gap-2 md:justify-end lg:justify-end">
                     {job.tech.map((tech) => (
                       <span
                         key={tech}
@@ -155,15 +182,15 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="thoughts" ref={(el) => (sectionsRef.current[2] = el)} className="min-h-screen py-32 opacity-0">
-          <div className="space-y-16">
-            <h2 className="text-4xl font-light">Recent Thoughts</h2>
+        <section id="thoughts" ref={(el) => (sectionsRef.current[2] = el)} className="min-h-screen py-16 md:py-24 lg:py-32 opacity-0">
+          <div className="space-y-8 md:space-y-12 lg:space-y-16">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Recent Thoughts</h2>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               {recentThoughts.map((post, index) => (
                 <article
                   key={index}
-                  className="group p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
+                  className="group p-4 md:p-6 lg:p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
@@ -171,7 +198,7 @@ export default function Home() {
                       <span>{post.readTime}</span>
                     </div>
 
-                    <h3 className="text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
+                    <h3 className="text-lg md:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
                       {post.title}
                     </h3>
 
@@ -200,25 +227,25 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="certifications" ref={(el) => (sectionsRef.current[3] = el)} className="py-32 opacity-0">
-          <div className="space-y-16">
+        <section id="certifications" ref={(el) => (sectionsRef.current[3] = el)} className="py-16 md:py-24 lg:py-32 opacity-0">
+          <div className="space-y-8 md:space-y-12 lg:space-y-16">
             <div className="flex items-end justify-between">
-              <h2 className="text-4xl font-light">Certifications</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Certifications</h2>
               <div className="text-sm text-muted-foreground font-mono">PROFESSIONAL DEVELOPMENT</div>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               {certifications.map((cert, index) => (
                 <div
                   key={index}
-                  className="group p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg"
+                  className="group p-4 md:p-6 lg:p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg"
                 >
                   <div className="space-y-6">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-4">
                         <div className="text-3xl">{cert.icon}</div>
                         <div>
-                          <h3 className="text-xl font-medium leading-tight">{cert.name}</h3>
+                          <h3 className="text-lg md:text-xl font-medium leading-tight">{cert.name}</h3>
                           <div className="flex items-center gap-2 mt-2">
                             <span className="text-muted-foreground">{cert.provider}</span>
                             <span className="text-muted-foreground">•</span>
@@ -276,13 +303,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="connect" ref={(el) => (sectionsRef.current[4] = el)} className="py-32 opacity-0">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <h2 className="text-4xl font-light">Let's Connect</h2>
+        <section id="connect" ref={(el) => (sectionsRef.current[4] = el)} className="py-16 md:py-24 lg:py-32 opacity-0">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+            <div className="space-y-6 md:space-y-8">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Let's Connect</h2>
 
-              <div className="space-y-6">
-                <p className="text-xl text-muted-foreground leading-relaxed">
+              <div className="space-y-4 md:space-y-6">
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                   Open to opportunities in data analysis, quality management, process optimisation, and industrial engineering. Certified in Google Data Analytics and PFMEA, ready to deliver innovative solutions that drive business success.
                 </p>
 
@@ -305,13 +332,10 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="space-y-8">
-              <div className="text-sm text-muted-foreground font-mono">GLOBAL CONNECTIONS</div>
-              
-
+            <div className="space-y-6 md:space-y-8">
               <div className="text-sm text-muted-foreground font-mono">ELSEWHERE</div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 {socialLinks.map((social) => (
                   social.name === "Email" || social.name === "Phone" ? (
                     <a
@@ -348,8 +372,8 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="py-16 border-t border-border">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+        <footer className="py-12 md:py-16 border-t border-border">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 md:gap-8">
             <div className="space-y-2">
               <div className="text-sm text-muted-foreground">© 2025 Oguzkagan Ilhan. All rights reserved.</div>
               <div className="text-xs text-muted-foreground">Built with Next.js and deployed on Vercel</div>
