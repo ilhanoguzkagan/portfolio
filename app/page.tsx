@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { workExperience, recentThoughts, certifications, socialLinks } from "@/lib/data"
+import { workExperience, personalProjects, certifications, socialLinks } from "@/lib/data.tsx"
 import { useLiquidCursor } from "@/hooks/useLiquidCursor"
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 import { useTheme } from "@/hooks/useTheme"
@@ -33,7 +33,7 @@ export default function Home() {
       {/* Desktop Navigation */}
       <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
         <div className="flex flex-col gap-4">
-          {["intro", "work", "thoughts", "certifications", "connect"].map((section) => (
+          {["intro", "work", "projects", "certifications", "connect"].map((section) => (
             <button
               key={section}
               onClick={() => document.getElementById(section)?.scrollIntoView({ behavior: "smooth" })}
@@ -67,10 +67,10 @@ export default function Home() {
               )
             },
             { 
-              id: "thoughts", 
+              id: "projects", 
               icon: (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                 </svg>
               )
             },
@@ -146,8 +146,8 @@ export default function Home() {
                   
                   <div className="mt-4">
                     <Link
-                      href="/Oguzkagan-CV.pdf"
-                      download="Oguzkagan_Ilhan_CV.pdf"
+                      href="/oguzkagan-resume.pdf"
+                      download="oguzkagan-resume.pdf"
                       className="group inline-flex items-center gap-2 px-3 py-2 text-sm border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300"
                     >
                       <svg
@@ -167,7 +167,6 @@ export default function Home() {
 
             <div className="lg:col-span-2 flex flex-col justify-end space-y-8">
               <div className="space-y-4">
-                <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
                 <div className="space-y-2">
                   <div className="text-foreground">Amazon FBA Seller</div>
                   <div className="text-muted-foreground">@ E-Commerce Entrepreneur</div>
@@ -216,7 +215,7 @@ export default function Home() {
                       <h3 className="text-lg md:text-xl font-medium">{job.role}</h3>
                       <div className="text-muted-foreground">{job.company}</div>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed max-w-lg">{job.description}</p>
+                    <p className="text-muted-foreground leading-relaxed max-w-lg whitespace-pre-line">{job.description}</p>
                   </div>
 
                   <div className="md:col-span-2 lg:col-span-4 flex flex-wrap gap-2 items-start md:justify-end lg:justify-end">
@@ -235,44 +234,52 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="thoughts" ref={(el) => (sectionsRef.current[2] = el)} className="min-h-screen py-16 md:py-24 lg:py-32 opacity-0">
+        <section id="projects" ref={(el) => (sectionsRef.current[2] = el)} className="min-h-screen py-16 md:py-24 lg:py-32 opacity-0">
           <div className="space-y-8 md:space-y-12 lg:space-y-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Recent Thoughts</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Personal Projects</h2>
 
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-              {recentThoughts.map((post, index) => (
+              {personalProjects.map((project, index) => (
                 <article
                   key={index}
                   className="group p-4 md:p-6 lg:p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
                 >
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
-                      <span>{post.date}</span>
-                      <span>{post.readTime}</span>
-                    </div>
-
                     <h3 className="text-lg md:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
-                      {post.title}
+                      {project.title}
                     </h3>
 
-                    <p className="text-muted-foreground leading-relaxed">{post.excerpt}</p>
+                    <p className="text-muted-foreground leading-relaxed">{project.description}</p>
 
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                      <span>Read more</span>
-                      <svg
-                        className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 whitespace-nowrap"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
+
+                    {project.link && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
+                        <svg
+                          className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
                 </article>
               ))}
