@@ -447,3 +447,71 @@
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  /* Faster, simpler animations on mobile */
+  .section-hidden {
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transform: translateY(10px);
+  }
+
+  .animate-fade-in-up {
+    animation: mobileFadeInUp 0.5s ease-out forwards !important;
+  }
+
+  @keyframes mobileFadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Optimize experience section for mobile performance */
+  #work .group {
+    transition: none; /* Remove complex hover transitions */
+    will-change: auto; /* Reduce GPU usage */
+  }
+
+  #work .group:hover {
+    transform: none; /* Disable hover transforms */
+  }
+
+  /* Simplify layout calculations on mobile */
+  #work .grid.md\\:grid-cols-8.lg\\:grid-cols-12 {
+    display: block !important; /* Use block layout instead of grid */
+  }
+
+  #work .md\\:col-span-2.lg\\:col-span-2,
+  #work .md\\:col-span-4.lg\\:col-span-6,
+  #work .md\\:col-span-2.lg\\:col-span-4 {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+
+  /* Reduce font weight calculations */
+  #work h3 {
+    font-weight: 500 !important; /* Use fixed weight instead of medium */
+  }
+
+  /* Optimize tech tags rendering */
+  #work .flex.flex-col {
+    display: block !important;
+    space-y: 0 !important;
+  }
+
+  #work .flex.flex-wrap {
+    justify-content: flex-start !important;
+    margin-bottom: 0.5rem;
+  }
+
+  #work .flex.flex-wrap span {
+    margin: 0.125rem 0.25rem 0.125rem 0 !important;
+    font-size: 0.6875rem !important; /* Slightly smaller on mobile */
+    padding: 0.25rem 0.5rem !important;
+  }
+}
