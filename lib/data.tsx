@@ -45,21 +45,15 @@ export const workExperience = [
 
 export const personalProjects = [
   {
-    title: "Personal Portfolio Website",
-    description: "A minimalist and responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features a dynamic liquid cursor, smooth scrolling, and a theme switcher. The design is clean and modern, focusing on a great user experience.",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
-    link: "https://oguzkagan.vercel.app/",
-  },
-  {
-    title: "CoreData To-Do App",
-    description: "A native iOS to-do list application developed with Swift and SwiftUI. Utilizes CoreData for persistent local storage, allowing users to create, manage, and track their tasks efficiently. The app features a clean, intuitive user interface that follows Apple's Human Interface Guidelines.",
-    tech: ["Swift", "SwiftUI", "CoreData", "Xcode"],
+    title: "AI-Assisted Portfolio Website Development",
+    description: "Leveraged AI code generation tools (ChatGPT, Claude) to build and deploy a fully functional personal portfolio website without prior hands-on web development experience. Managed the entire process from prompt engineering for UI/UX design and functionality to final implementation, demonstrating an ability to rapidly learn and apply new technologies to achieve specific goals.",
+    tech: ["AI Code Generation", "Prompt Engineering", "Next.js", "React", "Tailwind CSS"],
     link: "",
   },
   {
-    title: "Automated Video Creator",
-    description: "A Python-based application that automates the creation of short-form videos. The script fetches trending topics, generates a script using an AI API, synthesizes voice-overs, and combines stock footage to produce engaging videos for social media platforms.",
-    tech: ["Python", "MoviePy", "OpenAI API", "ElevenLabs API"],
+    title: "AI-Enhanced Data Handling & Automation",
+    description: "Utilized AI assistants to write and debug Python scripts for fetching, parsing, and cleaning data from public APIs, significantly accelerating the data retrieval process. Applied AI tools to streamline the use of command-line interfaces (CLIs) for various technical tasks, improving workflow efficiency and reducing manual processing time.",
+    tech: ["Python Scripting", "API Integration", "Data Processing", "CLI Automation", "AI-Assisted Development"],
     link: "",
   },
 ];

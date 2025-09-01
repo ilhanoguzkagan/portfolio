@@ -48,7 +48,7 @@ export default function Home() {
 
       {/* Mobile Navigation */}
       <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-10 lg:hidden">
-        <div className="flex gap-2 p-3 bg-background/80 backdrop-blur-lg rounded-full border border-border/50 shadow-lg">
+        <div className="flex gap-2 p-3 rounded-full mobile-nav-glass">
           {[
             { 
               id: "intro", 
@@ -94,10 +94,10 @@ export default function Home() {
             <button
               key={section.id}
               onClick={() => document.getElementById(section.id)?.scrollIntoView({ behavior: "smooth" })}
-              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+              className={`w-10 h-10 rounded-full flex items-center justify-center mobile-nav-icon ${
                 activeSection === section.id 
-                  ? "bg-foreground text-background scale-110" 
-                  : "bg-transparent text-muted-foreground hover:bg-muted/30 hover:text-foreground"
+                  ? "active text-foreground" 
+                  : "text-muted-foreground hover:text-foreground"
               }`}
               aria-label={`Navigate to ${section.id}`}
             >
@@ -168,8 +168,9 @@ export default function Home() {
             <div className="lg:col-span-2 flex flex-col justify-end space-y-8">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <div className="text-foreground">Amazon FBA Seller</div>
-                  <div className="text-muted-foreground">@ E-Commerce Entrepreneur</div>
+                  <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Currently</div>
+                  <div className="text-foreground">E-Commerce Entrepreneur</div>
+                  <div className="text-muted-foreground">@ Self-Managed E-Commerce Business</div>
                   <div className="text-xs text-muted-foreground">Mar 2024 — Present</div>
                 </div>
               </div>
@@ -368,28 +369,6 @@ export default function Home() {
             <div className="space-y-6 md:space-y-8">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Let's Connect</h2>
 
-              <div className="space-y-4 md:space-y-6">
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  Open to opportunities in data analysis, quality management, process optimisation, and industrial engineering. Certified in Google Data Analytics and PFMEA, ready to deliver innovative solutions that drive business success.
-                </p>
-
-                <div className="space-y-4">
-                  <Link
-                    href="mailto:oguzkaganilhan@gmail.com"
-                    className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors duration-300"
-                  >
-                    <span className="text-lg">oguzkaganilhan@gmail.com</span>
-                    <svg
-                      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
             </div>
 
             <div className="space-y-6 md:space-y-8">
