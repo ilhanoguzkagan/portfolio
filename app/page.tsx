@@ -146,8 +146,8 @@ export default function Home() {
                   
                   <div className="mt-4">
                     <Link
-                      href="/oguzkagan-resume.pdf"
-                      download="oguzkagan-resume.pdf"
+                      href="/Oguzkagan-Resume.pdf"
+                      download="Oguzkagan-Resume.pdf"
                       className="group inline-flex items-center gap-2 px-3 py-2 text-sm border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300"
                     >
                       <svg

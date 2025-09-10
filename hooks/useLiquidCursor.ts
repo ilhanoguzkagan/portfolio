@@ -8,8 +8,8 @@ export function useLiquidCursor() {
     if (!cursor) return;
 
     const moveCursor = (e: MouseEvent) => {
-      cursor.style.left = `${e.clientX - 30}px`;
-      cursor.style.top = `${e.clientY - 30}px`;
+      cursor.style.left = `${e.clientX - 15}px`;
+      cursor.style.top = `${e.clientY - 15}px`;
       // Remove the transform override to allow natural system-speed movement
     };
 
