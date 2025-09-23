@@ -8,8 +8,8 @@ export function useIntersectionObserver(options?: IntersectionObserverInit) {
     // Optimize for mobile performance
     const isMobile = window.innerWidth < 768;
     const optimizedOptions = {
-      threshold: isMobile ? 0.1 : 0.2,
-      rootMargin: isMobile ? '0px 0px -10% 0px' : '0px 0px -15% 0px'
+      threshold: isMobile ? 0.01 : 0.2,
+      rootMargin: isMobile ? '20px 0px 20px 0px' : '0px 0px -15% 0px'
     };
 
     const observer = new IntersectionObserver(
@@ -28,19 +28,41 @@ export function useIntersectionObserver(options?: IntersectionObserverInit) {
       options || optimizedOptions
     );
 
-    // Add small delay for mobile to reduce initial load impact
-    const delay = isMobile ? 150 : 100;
-    const timeout = setTimeout(() => {
+    // Immediate setup - no delay on mobile
+    const delay = isMobile ? 0 : 100;
+    
+    const setupObserver = () => {
       sectionsRef.current.forEach((section) => {
         if (section) {
           observer.observe(section);
+          // For mobile, immediately check all sections and make visible ones appear
+          if (isMobile) {
+            const rect = section.getBoundingClientRect();
+            const isInViewport = rect.top < (window.innerHeight * 1.2) && rect.bottom > -100;
+            if (isInViewport) {
+              section.classList.add('animate-fade-in-up');
+              section.classList.remove('opacity-0');
+              if (section.id) {
+                setActiveSection(section.id);
+              }
+            }
+          }
         }
       });
-    }, delay);
+    };
+
+    if (delay === 0) {
+      setupObserver();
+    } else {
+      const timeout = setTimeout(setupObserver, delay);
+      return () => {
+        observer.disconnect();
+        clearTimeout(timeout);
+      };
+    }
 
     return () => {
       observer.disconnect();
-      clearTimeout(timeout);
     };
   }, [options]);
 

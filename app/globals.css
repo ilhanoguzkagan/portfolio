@@ -418,20 +418,26 @@
 
 /* Mobile Performance Optimizations */
 @media (max-width: 768px) {
+  /* Immediate visibility for critical sections */
+  #work {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
   /* Faster, simpler animations on mobile */
   .section-hidden {
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    transform: translateY(10px);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    transform: translateY(5px);
   }
 
   .animate-fade-in-up {
-    animation: mobileFadeInUp 0.5s ease-out forwards !important;
+    animation: mobileFadeInUp 0.3s ease-out forwards !important;
   }
 
   @keyframes mobileFadeInUp {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(5px);
     }
     to {
       opacity: 1;
