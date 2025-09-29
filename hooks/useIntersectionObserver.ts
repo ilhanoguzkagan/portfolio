@@ -3,48 +3,65 @@ import { useEffect, useRef, useState } from 'react';
 export function useIntersectionObserver(options?: IntersectionObserverInit) {
   const [activeSection, setActiveSection] = useState('');
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
 
   useEffect(() => {
-    // Optimize for mobile performance
-    const isMobile = window.innerWidth < 768;
-    const optimizedOptions = {
-      threshold: isMobile ? 0.01 : 0.2,
-      rootMargin: isMobile ? '20px 0px 20px 0px' : '0px 0px -15% 0px'
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const updateViewportState = () => {
+      setIsMobileViewport(window.matchMedia('(max-width: 767px)').matches);
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Use requestAnimationFrame for smoother animations
-            requestAnimationFrame(() => {
-              entry.target.classList.add('animate-fade-in-up');
-              entry.target.classList.remove('opacity-0');
-            });
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      options || optimizedOptions
-    );
+    updateViewportState();
+    window.addEventListener('resize', updateViewportState);
 
-    // Immediate setup - no delay on mobile
-    const delay = isMobile ? 0 : 100;
-    
+    return () => {
+      window.removeEventListener('resize', updateViewportState);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const mergedOptions: IntersectionObserverInit = {
+      root: options?.root ?? null,
+      rootMargin: options?.rootMargin ?? (isMobileViewport ? '20px 0px 20px 0px' : '0px 0px -20% 0px'),
+      threshold: options?.threshold ?? (isMobileViewport ? 0.01 : 0.3),
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(() => {
+            entry.target.classList.add('animate-fade-in-up');
+            entry.target.classList.remove('opacity-0');
+          });
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, mergedOptions);
+
+    const delay = isMobileViewport ? 0 : 100;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
     const setupObserver = () => {
       sectionsRef.current.forEach((section) => {
-        if (section) {
-          observer.observe(section);
-          // For mobile, immediately check all sections and make visible ones appear
-          if (isMobile) {
-            const rect = section.getBoundingClientRect();
-            const isInViewport = rect.top < (window.innerHeight * 1.2) && rect.bottom > -100;
-            if (isInViewport) {
-              section.classList.add('animate-fade-in-up');
-              section.classList.remove('opacity-0');
-              if (section.id) {
-                setActiveSection(section.id);
-              }
+        if (!section) return;
+
+        observer.observe(section);
+
+        if (isMobileViewport) {
+          const rect = section.getBoundingClientRect();
+          const isInViewport = rect.top < window.innerHeight * 1.2 && rect.bottom > -100;
+          if (isInViewport) {
+            section.classList.add('animate-fade-in-up');
+            section.classList.remove('opacity-0');
+            if (section.id) {
+              setActiveSection(section.id);
             }
           }
         }
@@ -54,17 +71,16 @@ export function useIntersectionObserver(options?: IntersectionObserverInit) {
     if (delay === 0) {
       setupObserver();
     } else {
-      const timeout = setTimeout(setupObserver, delay);
-      return () => {
-        observer.disconnect();
-        clearTimeout(timeout);
-      };
+      timeoutId = setTimeout(setupObserver, delay);
     }
 
     return () => {
       observer.disconnect();
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     };
-  }, [options]);
+  }, [options, isMobileViewport]);
 
   return { sectionsRef, activeSection };
 }

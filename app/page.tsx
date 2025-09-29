@@ -9,7 +9,7 @@ import { useTheme } from "@/hooks/useTheme"
 
 export default function Home() {
   const { isDark, toggleTheme } = useTheme();
-  const { sectionsRef, activeSection } = useIntersectionObserver({ threshold: 0.3, rootMargin: "0px 0px -20% 0px" });
+  const { sectionsRef, activeSection } = useIntersectionObserver();
   const cursorRef = useLiquidCursor();
 
   return (
@@ -118,19 +118,15 @@ export default function Home() {
               <div className="space-y-2">
                 <div className="text-sm text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2025</div>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight">
-                  Oguzkagan
+                  Industrial
                   <br />
-                  <span className="text-muted-foreground">Ilhan</span>
+                  <span className="text-muted-foreground">Engineer</span>
                 </h1>
               </div>
 
               <div className="space-y-6 max-w-md">
                 <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                  A versatile Industrial Engineer with a strong foundation in <span className="text-foreground">data analysis</span>, <span className="text-foreground">quality management</span>, and <span className="text-foreground">process optimisation</span>.
-                  Experienced in leading
-                  <span className="text-foreground"> cross-functional teams</span>,<span className="text-foreground"> continuous improvement</span>,
-                  and leveraging advanced
-                  <span className="text-foreground"> problem-solving techniques</span> to achieve measurable results.
+                  A versatile and analytical Industrial Engineer with a proven track record in data analysis, process optimisation, and quality management. Experienced in leveraging SQL, Python, and Power BI to transform complex data into actionable insights and drive data-informed business decisions. 
                 </p>
 
                 <div className="flex flex-col gap-3 text-sm text-muted-foreground">
@@ -169,8 +165,8 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Currently</div>
-                  <div className="text-foreground">E-Commerce Entrepreneur</div>
-                  <div className="text-muted-foreground">@ Self-Managed E-Commerce Business</div>
+                  <div className="text-foreground">Product Analyst</div>
+                  <div className="text-muted-foreground">@ Self-Managed E-Commerce Business (Amazon FBA) · Freelance</div>
                   <div className="text-xs text-muted-foreground">Mar 2024 — Present</div>
                 </div>
               </div>
@@ -178,7 +174,7 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
                 <div className="flex flex-wrap gap-2">
-                  {["SQL", "Python", "Power BI", "Advanced Excel", "PFMEA", "ISO 9001", "8D"].map((skill) => (
+                  {["SQL", "Python", "Power BI", "MS Excel", "Data Modelling", "SAP ERP", "5WHY", "Ishikawa", "PFMEA", "8D Methodology", "CAPA Process", "ISO 9001", "IATF 16949", "AI Code Generation", "Prompt Engineering"].map((skill) => (
                     <span
                       key={skill}
                       className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
@@ -196,7 +192,7 @@ export default function Home() {
           <div className="space-y-8 md:space-y-12 lg:space-y-16">
             <div className="flex items-end justify-between">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Experiences</h2>
-              <div className="text-sm text-muted-foreground font-mono">2019 – Present</div>
+              <div className="text-sm text-muted-foreground font-mono">2019 – 2025</div>
             </div>
 
             <div className="space-y-6 md:space-y-8 lg:space-y-12">
@@ -211,7 +207,7 @@ export default function Home() {
                   }}
                 >
                   <div className="md:col-span-2 lg:col-span-2">
-                    <div className="text-base md:text-lg lg:text-xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500 whitespace-nowrap">
+                    <div className="text-base md:text-lg lg:text-xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
                       {job.startYear} – {job.endYear}
                     </div>
                   </div>
@@ -229,7 +225,7 @@ export default function Home() {
                       {job.tech.slice(0, 2).map((tech) => (
                         <span
                           key={tech}
-                          className="px-2.5 py-1 text-xs font-medium border border-border rounded-md hover:border-muted-foreground/50 transition-colors duration-300 whitespace-nowrap bg-muted/20"
+                          className="px-2.5 py-1 text-xs font-medium border border-border rounded-md hover:border-muted-foreground/50 transition-colors duration-300 bg-muted/20"
                         >
                           {tech}
                         </span>
@@ -240,7 +236,7 @@ export default function Home() {
                         {job.tech.slice(2).map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-1 text-xs font-medium border border-border rounded-md hover:border-muted-foreground/50 transition-colors duration-300 whitespace-nowrap bg-muted/20"
+                            className="px-2.5 py-1 text-xs font-medium border border-border rounded-md hover:border-muted-foreground/50 transition-colors duration-300 bg-muted/20"
                           >
                             {tech}
                           </span>
@@ -386,7 +382,7 @@ export default function Home() {
         <section id="connect" ref={(el) => (sectionsRef.current[4] = el)} className="py-16 md:py-24 lg:py-32 opacity-0">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             <div className="space-y-6 md:space-y-8">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Let's Connect</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-light">Let&apos;s Connect</h2>
 
             </div>
 

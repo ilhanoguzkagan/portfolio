@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState, useCallback } from "react"
+import { useTheme as useNextTheme } from "next-themes"
 
 export function useTheme() {
-  const [isDark, setIsDark] = useState(true);
+  const { theme, resolvedTheme, setTheme } = useNextTheme()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDark);
-  }, [isDark]);
+    setMounted(true)
+  }, [])
 
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
+  const currentTheme = resolvedTheme ?? theme ?? "dark"
+  const isDark = mounted ? currentTheme === "dark" : (theme ?? "dark") === "dark"
 
-  return { isDark, toggleTheme };
+  const toggleTheme = useCallback(() => {
+    setTheme(isDark ? "light" : "dark")
+  }, [isDark, setTheme])
+
+  return { isDark, toggleTheme }
 }
