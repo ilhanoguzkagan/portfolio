@@ -7,10 +7,23 @@ export function useLiquidCursor() {
     const cursor = cursorRef.current;
     if (!cursor) return;
 
+    let rafId: number | null = null;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const updatePosition = () => {
+      cursor.style.left = `${mouseX - 15}px`;
+      cursor.style.top = `${mouseY - 15}px`;
+      rafId = null;
+    };
+
     const moveCursor = (e: MouseEvent) => {
-      cursor.style.left = `${e.clientX - 15}px`;
-      cursor.style.top = `${e.clientY - 15}px`;
-      // Remove the transform override to allow natural system-speed movement
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!rafId) {
+        rafId = requestAnimationFrame(updatePosition);
+      }
     };
 
     const addHoverEffect = (e: Event) => {
@@ -40,6 +53,9 @@ export function useLiquidCursor() {
       document.removeEventListener('mousemove', moveCursor);
       document.removeEventListener('mouseover', addHoverEffect);
       document.removeEventListener('mousedown', addClickEffect);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, []);
 
